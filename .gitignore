@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+outputs/
+test_artifacts/
+*.db
+.env
+.venv/

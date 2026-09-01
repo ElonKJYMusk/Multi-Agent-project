@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real-finan Portfolio Showcase</title>
+  <style>
+    :root {
+      --navy:#07111f; --navy-2:#0b1829; --panel:#102238; --panel-2:#132a43;
+      --line:#243c55; --text:#f5f8fb; --muted:#9db0c3; --blue:#4b9dff;
+      --cyan:#48d6d2; --green:#4ad6a0; --amber:#ffbd62; --red:#ff7d7d;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;width:1600px;height:900px;overflow:hidden;background:var(--navy);font-family:"Segoe UI",Arial,sans-serif;color:var(--text)}
+    body{position:relative}
+    .page{display:none;width:1600px;height:900px;position:relative;overflow:hidden;padding:58px 72px 50px;background:
+      radial-gradient(circle at 84% 12%,rgba(75,157,255,.18),transparent 28%),
+      radial-gradient(circle at 4% 92%,rgba(72,214,210,.12),transparent 32%),
+      linear-gradient(135deg,#07111f 0%,#0a1727 60%,#08131f 100%)}
+    .page.active{display:block}
+    .grid-bg{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+    .top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:14px;font-size:21px;font-weight:700;letter-spacing:-.3px}
+    .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:#04101f;font-weight:900;box-shadow:0 12px 30px rgba(72,214,210,.18)}
+    .eyebrow{font-size:12px;color:#b9c8d6;letter-spacing:2.2px;text-transform:uppercase;font-weight:700}
+    .guided{border:1px solid rgba(72,214,210,.45);background:rgba(72,214,210,.08);color:#83eee9;border-radius:999px;padding:9px 16px;font-size:12px;letter-spacing:1.1px;font-weight:700}
+    .footer{position:absolute;z-index:3;left:72px;right:72px;bottom:27px;display:flex;justify-content:space-between;align-items:center;color:#73899d;font-size:12px;letter-spacing:.3px}
+    .footer strong{color:#b8c6d3;font-weight:600}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:rgba(17,37,59,.7);color:#c1cfdb;font-size:13px;font-weight:600}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 13px var(--cyan)}
+
+    /* Slide 1 */
+    .hero{position:relative;z-index:2;display:grid;grid-template-columns:590px 1fr;gap:54px;align-items:center;height:710px}
+    h1{font-size:62px;line-height:1.03;letter-spacing:-2.5px;margin:18px 0 24px;max-width:590px}
+    h1 em{font-style:normal;color:var(--cyan)}
+    .lead{font-size:20px;line-height:1.55;color:#b4c5d4;max-width:560px;margin:0 0 28px}
+    .pills{display:flex;gap:10px;flex-wrap:wrap;max-width:570px}
+    .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;max-width:570px}
+    .proof-card{padding:16px 18px;border:1px solid var(--line);background:rgba(16,34,56,.72);border-radius:14px}
+    .proof-card b{display:block;font-size:25px;letter-spacing:-.6px}
+    .proof-card span{display:block;margin-top:5px;color:#8298ac;font-size:11px;text-transform:uppercase;letter-spacing:.9px}
+    .dashboard{height:650px;border-radius:26px;border:1px solid #2c4862;background:linear-gradient(180deg,#10243a,#0b1b2e);box-shadow:0 38px 80px rgba(0,0,0,.35);overflow:hidden;transform:perspective(1400px) rotateY(-3deg);position:relative}
+    .dash-nav{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--line);background:rgba(7,17,31,.55)}
+    .dash-brand{font-size:14px;font-weight:700}.online{font-size:11px;color:var(--green);display:flex;align-items:center;gap:7px}
+    .dash-body{display:grid;grid-template-columns:225px 1fr;height:588px}
+    .side{padding:20px 16px;border-right:1px solid var(--line);background:rgba(7,17,31,.22)}
+    .side-label{font-size:9px;letter-spacing:1.2px;color:#70879b;text-transform:uppercase;font-weight:700;margin:0 0 8px}
+    .query{font-size:10px;line-height:1.5;color:#c1cfda;padding:12px;border:1px solid var(--line);border-radius:9px;background:#0c1b2d;margin-bottom:15px}
+    .upload{height:65px;border:1px dashed #3a5871;border-radius:9px;display:grid;place-items:center;color:#8298ac;font-size:10px;margin-bottom:16px}
+    .launch{height:38px;border-radius:9px;background:linear-gradient(90deg,#347be5,#42c7ca);color:white;font-size:10px;font-weight:700;display:grid;place-items:center;margin-bottom:18px}
+    .step{display:flex;align-items:center;gap:9px;padding:7px 4px;color:#9bb0c3;font-size:9.5px}
+    .step i{font-style:normal;width:18px;height:18px;border-radius:5px;background:rgba(74,214,160,.12);color:var(--green);display:grid;place-items:center;font-size:10px}
+    .content{padding:22px}
+    .result-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}.result-head b{font-size:17px}.tag{font-size:8px;padding:5px 8px;border-radius:99px;color:#8dc5ff;background:rgba(75,157,255,.12);border:1px solid rgba(75,157,255,.3)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}
+    .stat{padding:13px;border-radius:10px;background:#122840;border:1px solid var(--line)}
+    .stat b{font-size:19px;display:block}.stat span{font-size:7px;color:#8197aa;text-transform:uppercase;letter-spacing:.7px}.good{color:var(--green)}.warn{color:var(--amber)}
+    .tabs{display:flex;gap:18px;border-bottom:1px solid var(--line);padding:0 2px 9px;color:#748b9f;font-size:9px}.tabs b{color:#86bfff}
+    .report-box{margin-top:12px;padding:18px;background:#10243a;border:1px solid var(--line);border-radius:12px}
+    .report-box h3{font-size:14px;margin:0 0 10px}.report-box p{font-size:9px;line-height:1.55;color:#a9bbca;margin:0 0 11px}
+    table{border-collapse:collapse;width:100%;font-size:8.5px;color:#aebfce}th{text-align:left;color:#71889c;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);padding:7px}td{padding:8px 7px;border-bottom:1px solid rgba(36,60,85,.7)}
+
+    /* Slide 2 */
+    .slide-title{position:relative;z-index:2;margin-top:48px;text-align:center}.slide-title h2{font-size:43px;letter-spacing:-1.5px;margin:0 0 10px}.slide-title p{font-size:16px;color:#97adbf;margin:0}
+    .architecture{position:relative;z-index:2;margin-top:46px;display:grid;grid-template-columns:230px 1fr 245px;gap:24px;align-items:center}
+    .column{display:flex;flex-direction:column;gap:13px}.arch-card{padding:18px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(20,43,69,.92),rgba(12,28,46,.92));border-radius:14px;position:relative}.arch-card small{display:block;color:#71889c;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}.arch-card b{font-size:15px}.arch-card p{font-size:11px;line-height:1.45;color:#9fb1c1;margin:7px 0 0}.source-card:after,.output-card:before{content:"";position:absolute;top:50%;width:24px;height:1px;background:#4a6b88}.source-card:after{right:-25px}.output-card:before{left:-25px}
+    .graph{padding:24px;border:1px solid #31516c;background:rgba(10,27,44,.82);border-radius:20px}.graph-label{text-align:center;color:#86bfff;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-bottom:18px}
+    .agent-row{display:flex;align-items:center;justify-content:center;gap:8px}.agent{width:100px;height:105px;padding:13px 8px;border:1px solid #31516c;border-radius:13px;text-align:center;background:#132a43}.agent-icon{margin:0 auto 10px;width:34px;height:34px;border-radius:10px;background:rgba(75,157,255,.14);color:#81bdff;display:grid;place-items:center;font-weight:800;font-size:13px}.agent b{font-size:11px;display:block}.agent span{display:block;color:#7f95a8;font-size:8.5px;margin-top:5px}.arrow{color:#4d7595;font-size:18px}
+    .replan{margin:18px auto 0;width:370px;padding:11px;border:1px dashed rgba(255,189,98,.55);border-radius:10px;text-align:center;color:#e9bd79;font-size:10px;background:rgba(255,189,98,.06)}
+    .features{position:relative;z-index:2;margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{padding:15px 16px;border-top:2px solid var(--cyan);background:rgba(16,34,56,.7);border-radius:0 0 12px 12px}.feature b{display:block;font-size:12px;margin-bottom:4px}.feature span{font-size:10px;color:#8399ac}
+
+    /* Slide 3 */
+    .evidence-grid{position:relative;z-index:2;margin-top:43px;display:grid;grid-template-columns:1.2fr .8fr;gap:22px;height:650px}.panel{border:1px solid var(--line);background:rgba(14,31,51,.88);border-radius:20px;padding:24px;overflow:hidden}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:19px}.panel-title b{font-size:17px}.panel-title span{font-size:9px;color:#758c9f;text-transform:uppercase;letter-spacing:1px}.metric-table{font-size:12px}.metric-table th{padding:10px}.metric-table td{padding:13px 10px}.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:rgba(74,214,160,.1);color:var(--green);font-size:10px;font-weight:700}.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.risk-card{padding:17px;border:1px solid var(--line);border-radius:14px;background:#10243a}.risk-card strong{font-size:12px}.bar{height:7px;background:#243b52;border-radius:99px;margin-top:11px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),var(--cyan))}.fill.warnfill{background:linear-gradient(90deg,var(--amber),#ff8d73)}
+    .audit{display:flex;flex-direction:column;gap:11px}.audit-item{display:flex;align-items:flex-start;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;background:#10243a}.check{width:27px;height:27px;border-radius:8px;background:rgba(74,214,160,.11);color:var(--green);display:grid;place-items:center;font-size:14px;flex:none}.audit-item b{font-size:11px;display:block}.audit-item p{font-size:9px;color:#8298ab;line-height:1.4;margin:4px 0 0}.complete{margin-top:15px;border:1px solid rgba(74,214,160,.35);background:rgba(74,214,160,.07);border-radius:12px;padding:14px;display:flex;justify-content:space-between;align-items:center}.complete b{font-size:12px;color:#88edc6}.complete span{font-size:10px;color:#8ca1b3}
+  </style>
+</head>
+<body>
+  <section class="page" id="slide1">
+    <div class="grid-bg"></div>
+    <header class="top"><div class="brand"><div class="logo">R</div>Real-finan</div><div class="guided">GUIDED PROJECT CASE STUDY</div></header>
+    <main class="hero">
+      <div>
+        <div class="eyebrow">Enterprise AI Application</div>
+        <h1>Multi-Agent <em>Financial Intelligence</em></h1>
+        <p class="lead">A LangGraph-powered workflow that turns financial reports into structured analysis, risk insights, and an auditable research report.</p>
+        <div class="pills"><span class="pill"><i class="dot"></i>Python</span><span class="pill"><i class="dot"></i>LangGraph</span><span class="pill"><i class="dot"></i>FastAPI</span><span class="pill"><i class="dot"></i>DeepSeek</span><span class="pill"><i class="dot"></i>Docker</span></div>
+        <div class="proof"><div class="proof-card"><b>6</b><span>Specialized agents</span></div><div class="proof-card"><b>3</b><span>Auditable artifacts</span></div><div class="proof-card"><b>PDF → API</b><span>End-to-end workflow</span></div></div>
+      </div>
+      <div class="dashboard">
+        <div class="dash-nav"><div class="dash-brand">Real-finan · Enterprise Intelligence</div><div class="online"><i class="dot"></i>Pipeline completed</div></div>
+        <div class="dash-body">
+          <aside class="side"><div class="side-label">Analysis query</div><div class="query">Compare Apple and Microsoft: profitability, supply-chain exposure, R&amp;D efficiency, and management sentiment.</div><div class="side-label">Financial documents</div><div class="upload">PDF reports ready</div><div class="launch">LAUNCH ANALYSIS PIPELINE</div><div class="side-label">Agent pipeline</div><div class="step"><i>✓</i>Supervisor</div><div class="step"><i>✓</i>Retrieval Agent</div><div class="step"><i>✓</i>Quantitative Analyst</div><div class="step"><i>✓</i>Psychologist Agent</div><div class="step"><i>✓</i>Risk &amp; Compliance</div><div class="step"><i>✓</i>Report Synthesizer</div></aside>
+          <div class="content"><div class="result-head"><b>Analysis Results</b><span class="tag">AUDITABLE WORKFLOW</span></div><div class="stats"><div class="stat"><b>2</b><span>Companies</span></div><div class="stat"><b class="good">38.4%</b><span>Avg EBITDA</span></div><div class="stat"><b class="warn">3.9/10</b><span>Risk score</span></div><div class="stat"><b class="good">2/2</b><span>Bullish tone</span></div></div><div class="tabs"><b>Research Report</b><span>Visual Analytics</span><span>Audit Trail</span><span>Raw Data</span></div><div class="report-box"><h3>Executive Summary</h3><p>The analysis indicates that Apple has higher supply-chain exposure, while Microsoft maintains stronger R&amp;D intensity and operating resilience. Both companies demonstrate robust profitability.</p><table><thead><tr><th>Company</th><th>EBITDA Margin</th><th>R&amp;D Intensity</th><th>Supply Risk</th></tr></thead><tbody><tr><td>Apple</td><td class="good">34.27%</td><td>8.11%</td><td class="warn">Moderate</td></tr><tr><td>Microsoft</td><td class="good">42.43%</td><td>12.75%</td><td class="good">Low</td></tr></tbody></table></div></div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer"><strong>AI Application Engineering · Architecture Study &amp; Validation</strong><span>Demonstration data · For research purposes only</span></footer>
+  </section>
+
+  <section class="page" id="slide2">
+    <div class="grid-bg"></div><header class="top"><div class="brand"><div class="logo">R</div>Real-finan</div><div class="guided">SYSTEM ARCHITECTURE</div></header>
+    <div class="slide-title"><h2>Deterministic orchestration. Auditable decisions.</h2><p>Specialized agents follow an explicit workflow with conditional replanning and graceful fallback.</p></div>
+    <div class="architecture">
+      <div class="column"><div class="arch-card source-card"><small>Input 01</small><b>Financial-report PDFs</b><p>PyMuPDF extraction and document context ingestion.</p></div><div class="arch-card source-card"><small>Input 02</small><b>Market data</b><p>Provider abstraction for enrichment and comparison.</p></div><div class="arch-card source-card"><small>Input 03</small><b>User analysis query</b><p>Company, dimension, and deliverable requirements.</p></div></div>
+      <div class="graph"><div class="graph-label">LangGraph Agent Workflow</div><div class="agent-row"><div class="agent"><div class="agent-icon">01</div><b>Supervisor</b><span>Plan &amp; route</span></div><div class="arrow">→</div><div class="agent"><div class="agent-icon">02</div><b>Retrieval</b><span>Fuse sources</span></div><div class="arrow">→</div><div class="agent"><div class="agent-icon">03</div><b>Quant</b><span>Safe metrics</span></div><div class="arrow">→</div><div class="agent"><div class="agent-icon">04</div><b>Sentiment</b><span>Tone analysis</span></div><div class="arrow">→</div><div class="agent"><div class="agent-icon">05</div><b>Critic</b><span>Risk &amp; checks</span></div><div class="arrow">→</div><div class="agent"><div class="agent-icon">06</div><b>Synthesizer</b><span>Final report</span></div></div><div class="replan">↺ Missing data → Replanner → supplemental retrieval → graceful degradation</div></div>
+      <div class="column"><div class="arch-card output-card"><small>Output 01</small><b>Research report</b><p>Structured Markdown with metrics, SWOT, and scenarios.</p></div><div class="arch-card output-card"><small>Output 02</small><b>Audit trail</b><p>Step-level status, details, and execution evidence.</p></div><div class="arch-card output-card"><small>Output 03</small><b>Workflow state</b><p>Machine-readable JSON for review and integration.</p></div></div>
+    </div>
+    <div class="features"><div class="feature"><b>Safe calculations</b><span>AST allowlist instead of arbitrary code execution</span></div><div class="feature"><b>Resilient LLM layer</b><span>Provider abstraction with local fallback</span></div><div class="feature"><b>Service-ready API</b><span>FastAPI, background jobs, API-key auth</span></div><div class="feature"><b>Optional infrastructure</b><span>PostgreSQL, Redis, Neo4j, Docker Compose</span></div></div>
+    <footer class="footer"><strong>LangGraph · FastAPI · PostgreSQL · Redis · Neo4j</strong><span>Guided project case study</span></footer>
+  </section>
+
+  <section class="page" id="slide3">
+    <div class="grid-bg"></div><header class="top"><div class="brand"><div class="logo">R</div>Real-finan</div><div class="guided">REAL DEMO OUTPUT</div></header>
+    <div class="slide-title"><h2>Structured analysis with a visible audit trail</h2><p>Metrics shown below are taken from an existing Apple vs Microsoft demonstration run.</p></div>
+    <div class="evidence-grid">
+      <div class="panel"><div class="panel-title"><b>Financial Performance Comparison</b><span>FY2025 demo dataset</span></div><table class="metric-table"><thead><tr><th>Metric</th><th>Apple</th><th>Microsoft</th><th>Assessment</th></tr></thead><tbody><tr><td>EBITDA Margin</td><td>34.27%</td><td>42.43%</td><td><span class="badge">Strong</span></td></tr><tr><td>Operating Margin</td><td>30.00%</td><td>40.98%</td><td><span class="badge">Strong</span></td></tr><tr><td>Estimated Net Margin</td><td>18.85%</td><td>23.34%</td><td><span class="badge">Adequate</span></td></tr><tr><td>Estimated FCF Margin</td><td>13.71%</td><td>16.97%</td><td><span class="badge">Adequate</span></td></tr><tr><td>R&amp;D Intensity</td><td>8.11%</td><td>12.75%</td><td><span class="badge">Compared</span></td></tr></tbody></table><div class="risk-grid"><div class="risk-card"><strong>Apple · Composite Risk</strong><div class="bar"><div class="fill warnfill" style="width:39%"></div></div><span style="display:block;margin-top:8px;color:#ffbd62;font-size:12px;font-weight:700">3.9 / 10 · Moderate</span></div><div class="risk-card"><strong>Microsoft · Financial Risk</strong><div class="bar"><div class="fill" style="width:26%"></div></div><span style="display:block;margin-top:8px;color:#4ad6a0;font-size:12px;font-weight:700">2.6 / 10 · Low</span></div></div></div>
+      <div class="panel"><div class="panel-title"><b>Agent Audit Trail</b><span>6/6 completed</span></div><div class="audit"><div class="audit-item"><div class="check">✓</div><div><b>Supervisor</b><p>Strategic orchestration initiated for two companies.</p></div></div><div class="audit-item"><div class="check">✓</div><div><b>Retrieval Agent</b><p>Market, document, and company context fused.</p></div></div><div class="audit-item"><div class="check">✓</div><div><b>Quantitative Analyst</b><p>Ten metrics computed with the safe expression engine.</p></div></div><div class="audit-item"><div class="check">✓</div><div><b>Psychologist Agent</b><p>Management tone and confidence signals extracted.</p></div></div><div class="audit-item"><div class="check">✓</div><div><b>Risk &amp; Compliance</b><p>Compliance checks passed; risk dimensions scored.</p></div></div><div class="audit-item"><div class="check">✓</div><div><b>Report Synthesizer</b><p>SWOT, scenarios, peer comparison, and report assembled.</p></div></div></div><div class="complete"><b>PIPELINE COMPLETE</b><span>Report · Audit JSON · State JSON</span></div></div>
+    </div>
+    <footer class="footer"><strong>Evidence-based project presentation</strong><span>No client data · No invented business metrics</span></footer>
+  </section>
+
+  <script>
+    const slide = new URLSearchParams(location.search).get('slide') || '1';
+    document.getElementById('slide' + slide).classList.add('active');
+  </script>
+</body>
+</html>
